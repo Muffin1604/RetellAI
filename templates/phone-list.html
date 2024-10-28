@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone List</title>
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+
+<body>
+    <section class="admin_dashboard">
+        <svg class="loader-icon" width='200px' height='200px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(0 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(30 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.041666666666666664s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(60 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.08333333333333333s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(90 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.125s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(120 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.16666666666666666s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(150 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.20833333333333334s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(180 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.25s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(210 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.2916666666666667s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(240 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.3333333333333333s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(270 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.375s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(300 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.4166666666666667s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(330 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.4583333333333333s' repeatCount='indefinite'/></rect></svg>
+        <!-- left side menu-->
+        {% include 'base.html' %}
+        <!-- right side content info -->
+        <div class="content-page">
+            <div class="container-fluid">
+                <div class="dashboard_content">
+                    
+                    <div class="dashboard_content_inner phone_list_outer">
+                        <div id="snackbar" class="snackbar frequency py-1 mb-2" style="text-align: center; display: none"></div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                     Make an OutboundCall
+                                  </button>
+                                <div class="phone_list_table">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>No.</th>
+                                                    <th class="phone_number_heading">Phone Numbers</th>
+                                                    <th>Description</th>
+                                                    <th class="text-center">Setting</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for phon_num in phone_data %}
+                                                <tr>
+                                                    <td>{{ forloop.counter }}</td>
+                                                    <td>{{ phon_num.phone_num }}</td>
+                                                    <td>
+                                                        <div class="description">{{ phon_num.description }}</div></td>
+                                                        <td>
+                                                            <div class="setting_box position-relative">
+                                                                <div class="setting_icon text-center" 
+                                                                     data-bs-toggle="modal" 
+                                                                     data-bs-target="#settingModal"
+                                                                     data-id="{{ phon_num.id }}"
+                                                                     data-phone-num="{{ phon_num.phone_num }}"
+                                                                     data-description="{{ phon_num.description }}"
+                                                                     data-inbound-agent-id="{{ phon_num.inbound_agent.id }}"
+                                                                     data-outbound-agent-id="{{ phon_num.outbound_agent.id }}">
+                                                                    <img src="{% static 'images/Setting.svg' %}" class="img-fluid">
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                </tr>
+                                                {% endfor %}
+                                                
+                                            </tbody> 
+                                        </table>
+                                    </div>
+                                <button onclick="fetchPhoneData()" class="fetchAgentsBtn mt-3">Fetch Phone Data</button>  
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="phone_list_data">
+                                    <div class="data_box">
+                                        <p>Total Phone Numbers</p>
+                                        <h1>{{phone_num_count}}</h1>
+                                    </div>
+                                    <div class="data_box">
+                                        <p>Total Voice Agents</p>
+                                        <h1>{{ai_agents_count}}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<!-- setting modal -->
+<div class="modal fade" id="settingModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="open_setting_box">
+                <div class="text-end mb-2 close-setting" data-bs-dismiss="modal">
+                    <img src="{% static 'images/cross-icon.svg' %}" class="img-fluid">
+                </div>
+                <form id="updatePhoneForm" method="POST">
+                    {% csrf_token %}
+                    <div class="input_fields mb-3">
+                        <input type="text" class="form-control" id="phone_num_field" placeholder="Phone" readonly> 
+                        <input type="hidden" id="phone_id_field" name="phone_id">
+                    </div>
+                    <div class="input_fields mb-3">
+                        <textarea class="form-control" id="description_field" name="description" placeholder="Description"></textarea>
+                    </div>
+                    <div class="input_fields mb-3">
+                        <h5 class="">Select an agent</h5>
+                        <div class="mb-2">
+                            <label class="form-label">Inbound call agent</label>
+                            <select class="form-select" id="inbound_agent_field" name="inbound_agent">
+                                {% for agent in ai_agents %}
+                                <option value="{{ agent.id }}">{{ agent.agent_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div>
+                            <label class="form-label">Outbound call agent</label>
+                            <select class="form-select" id="outbound_agent_field" name="outbound_agent">
+                                {% for agent in ai_agents %}
+                                <option value="{{ agent.id }}">{{ agent.agent_name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="submit_btn">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  OutboundCall Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Make an Outbound Call</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form action="{% url 'make_call' %}" method="POST" id="outboundCallForm" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="fromNumber" class="form-label">From Number</label>
+                    <select class="form-select" id="fromNumber" name="fromNumber" required>
+                        <option value="">Select a number</option>
+                        {% for phon_num in phone_data %}
+                            <option value="{{ phon_num.phone_num }}">{{ phon_num.phone_num }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="phoneNumberInput" class="form-label">To Numbers</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="phoneNumberInput" placeholder="Enter a phone number">
+                        <button class="btn btn-outline-secondary" type="button" id="addPhoneNumber">Add</button>
+                    </div>
+                </div>
+                <div id="phoneNumbersList" class="mb-3"></div>
+                <input type="hidden" id="phoneNumbers" name="phoneNumbers">
+                
+                <!-- New Excel upload section -->
+                <div class="mb-3">
+                    <label for="excelFile" class="form-label">Or Upload Excel File</label>
+                    <input type="file" class="form-control" id="excelFile" name="excelFile" accept=".xlsx, .xls">
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" form="outboundCallForm" class="btn btn-success">Call</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/apexcharts.js' %}"></script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.toggle-btn').click(function () {
+            jQuery('body').addClass('menu-open')
+        });
+        jQuery('.close-btn').click(function () {
+            jQuery('body').removeClass('menu-open')
+        });
+    });
+</script>
+<!-- script for select lang -->
+<script>
+    const selected = document.querySelector('.select-selected');
+    const items = document.querySelector('.select-items');
+    const options = document.querySelectorAll('.option');
+
+    selected.addEventListener('click', (e) => {
+        e.stopPropagation();
+        items.classList.toggle('select-hide');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const imgSrc = option.querySelector('img').src;
+            const text = option.querySelector('span').textContent;
+
+            // Update the selected option's content
+            selected.innerHTML = `<img src="${imgSrc}" alt="Selected Image" /> <span>${text}</span>`;
+
+            // Hide the dropdown after selection
+            items.classList.add('select-hide');
+        });
+    });
+
+    // Close the dropdown if clicking outside the select box
+    document.addEventListener('click', () => {
+        items.classList.add('select-hide');
+    });
+
+</script>
+
+<!-- open setting box js start -->
+ <script>
+    
+   
+    function showSnackbar(message,status){
+        var snackbar = document.getElementById("snackbar");
+        snackbar.textContent = message;
+        snackbar.style.display = "block";
+        snackbar.style.backgroundColor =status=='S'?"#d1e7dd":"#f8d7da";
+        snackbar.style.color =status=='S'?"#0f5132":"#842029";
+        snackbar.style.borderColor =status=='S'?"#badbcc":"#f5c2c7";
+        snackbar.style.textTransform = "capitalize";
+        setTimeout(function() {
+            snackbar.style.display = "none";
+        }, 6000); 
+    }
+
+    function fetchPhoneData(){
+        var svgElement = document.querySelector('.loader-icon');
+        svgElement.style.display = 'block'; 
+        $.ajax({
+            url: "{% url 'fetch_phone_data' %}", 
+            type: "POST",
+            success: function(response) {
+                svgElement.style.display = 'none'; 
+                if (response.status === 'success') {
+                    showSnackbar(response.message, 'S');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000); 
+                } else {
+                    showSnackbar(response.message, 'F');
+                }
+            },
+            error: function(xhr, status, error) {
+                showSnackbar(xhr.responseText , 'F');
+            }
+        });
+    }
+
+ 
+    $(document).ready(function() {
+        // Form submission handler
+        $('#updatePhoneForm').on('submit', function(e) {
+            e.preventDefault();
+            let form = $(this);
+            let phoneId = form.find('input[name="phone_id"]').val();
+
+            $.ajax({
+                url: "{% url 'update_phone_data' %}",  
+                type: "POST",
+                data: $(this).serialize(),  
+                success: function(response) {
+                    console.log(response);
+
+                    // Update the table row and setting icon
+                    let tableRow = $('tr').find(`td:first:contains(${phoneId})`).closest('tr');  
+                    let settingIcon = tableRow.find('.setting_icon');
+                    
+                    // Update the description in the table
+                    tableRow.find('.description').text(response.description);
+
+                    // Update all the data attributes of the setting icon
+                    settingIcon.attr('data-description', response.description);
+                    settingIcon.attr('data-inbound-agent-id', response.inbound_agent);
+                    settingIcon.attr('data-outbound-agent-id', response.outbound_agent);
+
+                    // Close the modal
+                    $('#settingModal').modal('hide');
+
+                    showSnackbar('Phone data updated successfully', 'S');
+                },
+                error: function(response) {
+                    showSnackbar('Error updating phone data', 'F');
+                }
+            });
+        });
+    
+        // Re-populate modal when the setting icon is clicked
+        $(document).on('click', '.setting_icon', function() {
+            const phoneId = $(this).attr('data-id');
+            const phoneNum = $(this).attr('data-phone-num');
+            const description = $(this).attr('data-description');
+            const inboundAgentId = $(this).attr('data-inbound-agent-id');
+            const outboundAgentId = $(this).attr('data-outbound-agent-id');
+
+            // Populate the modal fields with the clicked phone number data
+            $('#phone_id_field').val(phoneId);
+            $('#phone_num_field').val(phoneNum);
+            $('#description_field').val(description);
+
+            // Set the inbound and outbound agent selections
+            $('#inbound_agent_field').val(inboundAgentId);
+            $('#outbound_agent_field').val(outboundAgentId);
+        });
+
+        let phoneNumbers = [];
+
+        $('#addPhoneNumber').click(function() {
+            addPhoneNumber();
+        });
+
+        $('#phoneNumberInput').keypress(function(e) {
+            if (e.which == 13) {
+                e.preventDefault();
+                addPhoneNumber();
+            }
+        });
+
+        function addPhoneNumber() {
+            let phoneNumber = $('#phoneNumberInput').val().trim();
+            if (phoneNumber) {
+                phoneNumbers.push(phoneNumber);
+                updatePhoneNumbersList();
+                $('#phoneNumberInput').val('');
+            }
+        }
+
+        function updatePhoneNumbersList() {
+            let list = $('#phoneNumbersList');
+            list.empty();
+            phoneNumbers.forEach((number, index) => {
+                list.append(`<div class="mb-2">
+                    ${number} 
+                    <button type="button" class="btn btn-sm btn-danger remove-number" data-index="${index}">Remove</button>
+                </div>`);
+            });
+            $('#phoneNumbers').val(JSON.stringify(phoneNumbers));
+        }
+
+        $(document).on('click', '.remove-number', function() {
+            let index = $(this).data('index');
+            phoneNumbers.splice(index, 1);
+            updatePhoneNumbersList();
+        });
+
+        $('#outboundCallForm').on('submit', function(e) {
+            e.preventDefault();
+            let formData = new FormData(this);
+            
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    $('#exampleModal').modal('hide');
+                    showSnackbar('Call initiated successfully', 'S');
+                    phoneNumbers = [];
+                    updatePhoneNumbersList();
+                    $('#excelFile').val(''); // Clear the file input
+                },
+                error: function(xhr, status, error) {
+                    showSnackbar('Error initiating call', 'F');
+                }
+            });
+        });
+
+        // New function to handle Excel file selection
+        $('#excelFile').on('change', function() {
+            if (this.files.length > 0) {
+                // If an Excel file is selected, clear the manually entered phone numbers
+                phoneNumbers = [];
+                updatePhoneNumbersList();
+                $('#phoneNumberInput').val('');
+            }
+        });
+    });
+
+    
+ </script>
+</html>

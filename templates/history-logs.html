@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Logs</title>
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+
+<body>
+    <section class="admin_dashboard">
+        <svg class="loader-icon" width='200px' height='200px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default"><rect x="0" y="0" width="100" height="100" fill="none" class="bk"></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(0 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(30 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.041666666666666664s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(60 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.08333333333333333s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(90 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.125s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(120 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.16666666666666666s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(150 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.20833333333333334s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(180 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.25s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(210 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.2916666666666667s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(240 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.3333333333333333s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(270 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.375s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(300 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.4166666666666667s' repeatCount='indefinite'/></rect><rect  x='46.5' y='40' width='7' height='20' rx='5' ry='5' fill='#7fddad' transform='rotate(330 50 50) translate(0 -30)'>  <animate attributeName='opacity' from='1' to='0' dur='0.5s' begin='0.4583333333333333s' repeatCount='indefinite'/></rect></svg>
+        <!-- left side menu-->
+        {% include 'base.html' %}
+        <!-- right side content info -->
+        <div class="content-page">
+            <div class="container-fluid">
+                <div class="dashboard_content">
+                    <button class="d-block d-lg-none toggle-btn">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    <div class="dashboard_content_inner history_logs_data">
+                        <div id="snackbar" class="snackbar frequency py-1 mb-2" style="text-align: center; display: none"></div>
+                        <div class="phone_list_table history_logs_table aide_table ">
+                            <button onclick="fetchCallHistory()" class="fetchAgentsBtn mb-3">Fetch Call History </button>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center" style="width:100px">No.</th>
+                                            <th style="width:250px">Phone Number</th>
+                                            <th style="width:200px">Call Type</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="table_body">
+                                    </tbody>
+                                </table>
+                                <div class="table_pagination mt-3">
+                                    <nav aria-label="Page navigation" class="table_pagination">
+                                        <div id="unfiltered_data_pagination_block"></div>
+    
+                                         <div id="filtered_block"></div>
+                                         
+                                     </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/apexcharts.js' %}"></script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.toggle-btn').click(function () {
+            jQuery('body').addClass('menu-open')
+        });
+        jQuery('.close-btn').click(function () {
+            jQuery('body').removeClass('menu-open')
+        });
+    });
+</script>
+<!-- script for select lang -->
+<script>
+    function showSnackbar(message,status){
+        var snackbar = document.getElementById("snackbar");
+        snackbar.textContent = message;
+        snackbar.style.display = "block";
+        snackbar.style.backgroundColor =status=='S'?"#d1e7dd":"#f8d7da";
+        snackbar.style.color =status=='S'?"#0f5132":"#842029";
+        snackbar.style.borderColor =status=='S'?"#badbcc":"#f5c2c7";
+        snackbar.style.textTransform = "capitalize";
+        setTimeout(function() {
+            snackbar.style.display = "none";
+        }, 6000); 
+    }
+
+    function fetchCallHistory(){
+        var svgElement = document.querySelector('.loader-icon');
+        svgElement.style.display = 'block'; 
+        $.ajax({
+            url: "{% url 'fetch_call_history' %}", 
+            type: "POST",
+            success: function(response) {
+                svgElement.style.display = 'none'; 
+                if (response.status === 'success') {
+                    showSnackbar(response.message, 'S');
+                    setTimeout(function() {
+                        location.reload();
+                    }, 2000); 
+                } else {
+                    showSnackbar(response.message, 'F');
+                }
+            },
+            error: function(xhr, status, error) {
+                showSnackbar(xhr.responseText , 'F');
+            }
+        });
+    }
+
+    $(document).ready(function() {
+        fetchRecords();
+
+    });
+
+    var page=1;
+    var limit=10; 
+    var responsePagination;
+
+    function showPaginationButtons(responsePagination,parentDiv,isFilter){
+        let currentPage = responsePagination.page_number;
+        let totalPages = responsePagination.total_pages;
+
+        const maxVisiblePages = 3; 
+
+        let startPage = Math.max(currentPage - Math.floor(maxVisiblePages / 2), 1);
+        let endPage = Math.min(startPage + maxVisiblePages - 1, totalPages);
+
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(endPage - maxVisiblePages + 1, 1);
+        }
+
+        let paginationHTML = '<div id="filtered_data_pagination_block"><ul class="pagination d-flex justify-content-end align-items-center mx-3 mb-4" style="margin-top:10px";>';
+            if (currentPage > 1) {
+            if(isFilter=="sortAndFilter"){
+                paginationHTML += '<li class="page-item previous_item"><a class="page-link" onclick="sendFiltersToBackend(' + (currentPage - 1) + ')">Previous</a></li>';     
+            }             
+            else{
+                paginationHTML += `<li class="page-item previous_item"><a class="page-link" onclick="fetchRecords('${currentPage - 1}')">Previous</a></li>`;     
+            }                         
+        }
+
+        if (startPage > 1) {
+            if(isFilter=="sortAndFilter"){
+                paginationHTML += '<li class="page-item"><a class="page-link" onclick="sendFiltersToBackend(1)">1</a></li>';
+            }
+            else{
+                
+                paginationHTML += `<li class="page-item previous_item"><a class="page-link" onclick="fetchRecords(1)">1</a></li>`;     
+                
+
+            }
+            if (startPage > 2) {
+                paginationHTML += '<li class="page-item">...</li>';
+            }
+        }
+
+        for (let i = startPage; i <= endPage; i++) {
+            if (i == currentPage) {
+                paginationHTML += `<li class="page-item active" id=${i}><a class="page-link">${i}</a></li>`;
+            } else {
+                if(isFilter=="sortAndFilter"){
+                   paginationHTML += `<li class="page-item id=${i}"><a class="page-link" onclick="sendFiltersToBackend('${i}')">${i}</a></li>`; 
+                }
+                else{
+                    paginationHTML += `<li class="page-item id=${i}"><a class="page-link" onclick="fetchRecords('${i}')">${i}</a></li>`;
+                }
+            }
+        }
+
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                paginationHTML += '<li class="page-item">...</li>';
+            }
+            if(isFilter=="sortAndFilter"){
+                paginationHTML += '<li class="page-item"><a class="page-link" onclick="sendFiltersToBackend(' + totalPages + ')">' + totalPages + '</a></li>';
+            }
+            else{
+                paginationHTML += `<li class="page-item"><a class="page-link" onclick="fetchRecords('${totalPages}')" >` + totalPages + '</a></li>';
+
+            }
+        }
+
+        if (currentPage < totalPages) {
+            if(isFilter=="sortAndFilter"){
+                paginationHTML += '<li class="page-item"><a class="page-link" onclick="sendFiltersToBackend(' + (currentPage + 1) + ')">Next</a></li>';                
+            }             
+            else{
+                paginationHTML += '<li class="page-item"><a class="page-link" onclick="fetchRecords('+(currentPage + 1)+')">Next</a></li>';                
+            }                           
+        }
+
+        paginationHTML += '</ul></div>';
+
+        parentDiv.innerHTML = paginationHTML;        
+                                        
+}
+function populateTable(data) {
+    var tableBody = document.getElementById('table_body');
+    tableBody.innerHTML = ''; // Clear existing table rows
+
+    // Loop through each call history entry and generate a row
+    data.forEach(function(entry, index) {
+        var row = `
+            <tr>
+                <td class="text-center">${index + 1}.</td>
+                <td>${entry.phone_number}</td>
+                <td>
+                    <div class="call_type_btn">
+                        <button type="button" class="${entry.call_type.toLowerCase()}_call">${entry.call_type === 'inbound' ? 'Inbound Call' : 'Outbound Call'}</button>
+                    </div>
+                </td>
+                <td>
+                    <div class="view_data text-center">
+                        <a href="/history-log-detail/${entry.id}">
+                            <img src="/static/images/table-view-icon.svg" class="img-fluid">
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        `;
+        tableBody.innerHTML += row;
+    });
+
+    // If no data, display a message
+    if (data.length === 0) {
+        tableBody.innerHTML = `
+            <tr>
+                <td colspan="4" class="text-center">No call history data found</td>
+            </tr>
+        `;
+    }
+}
+
+    function  fetchRecords(pageValue){
+        if(pageValue){
+            page=pageValue;
+        }
+        var csrf_token = '{{ csrf_token }}';
+         $.ajax({
+            url: `/get-call-history-data/${page}/${limit}/`,
+            method: 'GET',
+            dataType: 'json',
+             contentType: 'application/json',
+             headers: { "X-CSRFToken": csrf_token }, 
+             success: function (data) {
+                 if(data.Error=="NA"){
+                    if(pageValue){
+                        $('#table_body').empty();
+                    }
+                    populateTable(data.Status);
+                    var parentDiv = document.getElementById("unfiltered_data_pagination_block");       
+                    responsePagination = data.pagination_data;    
+                    if(responsePagination){
+                    
+                        var isEmpty = document.getElementById("unfiltered_data_pagination_block").innerHTML.trim() === "";
+                        if(!isEmpty){
+                            parentDiv.innerHTML="";
+                        }
+                        showPaginationButtons(responsePagination,parentDiv,false);
+                    }
+                 }
+                 else{
+                    $('#table_body').empty();
+                    $('#table_body').append(`
+                        <tr>
+                            <td colspan="6" class="text-center">No data found</td>
+                        </tr>
+                    `);
+                    $('#unfiltered_data_pagination_block').empty();
+                 }
+             },
+             error: function (error) {
+                 console.error(error);
+                 showSnackbar("Some Error in making request.",'F');
+             }
+         });
+    }
+
+
+</script>
+
+</html>

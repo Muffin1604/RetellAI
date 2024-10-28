@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Log Detail</title>
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+</head>
+
+<body>
+    <section class="admin_dashboard">
+        <!-- left side menu-->
+        {% include 'base.html' %}
+        <!-- right side content info -->
+        <div class="content-page">
+            <div class="container-fluid">
+                <div class="dashboard_content">
+                    <!-- <div class="dashboard_content_header d-flex align-items-center gap-3">
+                        <button class="d-block d-lg-none toggle-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        <div class="search_box position-relative w-100">
+                            <input type="search" class="form-control" placeholder="Search">
+                            <div class="search_icon">
+                                <img src="{% static 'images/Search.svg'  %}" class="img-fluid">
+                            </div>
+                        </div>
+                        <div class="custom-select-container position-relative">
+                            <div class="select-selected">
+                                <img src="{% static 'images/united-states.svg' %}" alt="Option 1 Image" />
+                                <span>Eng</span>
+                            </div>
+                            <div class="select-items select-hide">
+                                <div class="option">
+                                    <img src="{% static 'images/united-states.svg' %}" alt="Option 1 Image" />
+                                    <span>Eng</span>
+                                </div>
+                                <div class="option">
+                                    <img src="{% static 'images/united-states.svg' %}" alt="Option 1 Image" />
+                                    <span>Spanish</span>
+                                </div>
+                                <div class="option">
+                                    <img src="{% static 'images/united-states.svg' %}" alt="Option 1 Image" />
+                                    <span>Chinese</span>
+                                </div>
+                                <div class="option">
+                                    <img src="{% static 'images/united-states.svg' %}" alt="Option 1 Image" />
+                                    <span>Urdu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="dashboard_content_inner history_logs_data">
+                        <div class="history_log_detail_outer">
+                            <div class="history_log_detail">
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <div class="detail_left w-100">
+                                            <div class="detail_data">
+                                                <h6>Phone Number</h6>
+                                                <p>{{call_history.phone_number}}</p>
+                                            </div>
+                                            <div class="detail_data">
+                                                <h6>Start and End Time</h6>
+                                                <div class="time_detail">
+                                                    <p>{{formatted_start_time}}</p>
+                                                    <span>to</span>
+                                                    <p>{{formatted_end_time}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="detail_data">
+                                                <h6>Call Type</h6>
+                                                {% if call_history.call_type == 'inbound' %}
+                                                    <button type="button">Inbound Call</button>
+                                                {% else %}
+                                                    <button type="button">Outbound Call</button>
+                                                {% endif %}
+                                            </div>
+                                            <div class="call_recording">
+                                                <div
+                                                    class="d-flex justify-content-between align-items-center gap-2 mb-3">
+                                                    <h6 class="mb-0">Call Recording</h6>
+                                                    <span><a href="{{ call_history.call_recording_url }}" download>Get</a></span>
+                                                </div>
+                                                <div>
+                                                    <audio controls>
+                                                        <source src="{{ call_history.call_recording_url }}" type="audio/mpeg">
+                                                        Your browser does not support the audio element.
+                                                    </audio>
+                                                </div>
+                                            </div>
+                                            <div class="call_summary">
+                                                <div
+                                                    class="mb-3 call_summary_header d-flex justify-content-between align-items-center">
+                                                    <div
+                                                        class="d-flex justify-content-between gap-sm-4 gap-2 align-items-center flex-sm-nowrap flex-wrap">
+                                                        <h5 class="mb-0">Call Summary</h5>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <ul>
+                                                    {{call_history.call_summary}}
+                                                </ul>
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="call_transcript w-100">
+                                            <div
+                                                class="call_transcript_heading d-flex justify-content-between align-items-center gap-2 mb-3">
+                                                <div class="d-flex gap-3 align-items-center">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="/static/images/back-arrow.svg" class="img-fluid">
+                                                    </div>
+                                                    <h6 class="mb-0">Call Transcript</h6>
+                                                </div>
+                                                <span><a href="#" onclick="downloadTranscript(event)">Get</a></span>
+                                            </div>
+                                            <div class="call_ended_detail d-flex align-items-center">
+                                                <div
+                                                    class="person_img d-flex align-items-center justify-content-center">
+                                                    <img src="/static/images/person-img.svg" class="img-fluid">
+                                                </div>
+                                                <div class="d-flex w-100 justify-content-between">
+                                                    <div class="">
+                                                        <h6 class="mb-1">Call ended with {{agent_name}}</h6>
+                                                        <p class="mb-0">{{ user_name }} answered <span>{{human_readable_time}}</span></p>
+                                                    </div>
+                                                    <div class="">
+                                                        <h5>{{call_date}}</h5>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="timestamp_list">
+                                                <ul class="list-unstyled">
+                                                    {% if formatted_transcript %}
+                                                    {% for segment in formatted_transcript %}
+                                                        {{ segment|safe }}
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <li class="no-transcript">
+                                                        <div class="list_text">
+                                                            <p class="mb-0">No transcript available</p>
+                                                        </div>
+                                                    </li>
+                                                {% endif %}
+                                        
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/apexcharts.js' %}"></script>
+<script>
+    jQuery(document).ready(function () {
+        jQuery('.toggle-btn').click(function () {
+            jQuery('body').addClass('menu-open')
+        });
+        jQuery('.close-btn').click(function () {
+            jQuery('body').removeClass('menu-open')
+        });
+    });
+</script>
+<!-- script for select lang -->
+<script>
+    const selected = document.querySelector('.select-selected');
+    const items = document.querySelector('.select-items');
+    const options = document.querySelectorAll('.option');
+
+    // Toggle dropdown visibility on clicking the selected option (including its child elements)
+    selected.addEventListener('click', (e) => {
+        // Prevent the event from propagating to the document click listener
+        e.stopPropagation();
+        items.classList.toggle('select-hide');
+    });
+
+    options.forEach(option => {
+        option.addEventListener('click', () => {
+            const imgSrc = option.querySelector('img').src;
+            const text = option.querySelector('span').textContent;
+
+            // Update the selected option's content
+            selected.innerHTML = `<img src="${imgSrc}" alt="Selected Image" /> <span>${text}</span>`;
+
+            // Hide the dropdown after selection
+            items.classList.add('select-hide');
+        });
+    });
+
+    // Close the dropdown if clicking outside the select box
+    document.addEventListener('click', () => {
+        items.classList.add('select-hide');
+    });
+
+</script>
+
+<script>
+function downloadTranscript(event) {
+    event.preventDefault();
+    
+    // Get the transcript content
+    var transcriptList = document.querySelector('.timestamp_list').querySelectorAll('li');
+    
+    // Get the additional information
+    var agentName = "{{agent_name}}";
+    var caregiverName = "{{user_name}}";
+    var callDate = "{{call_date}}";
+    var callTime = "{{human_readable_time}}";
+    
+    // Create the header for the transcript
+    var header = "Agent: " + agentName + "\n" +
+                 "Caregiver: " + caregiverName + "\n" +
+                 "Date: " + callDate + "\n" +
+                 "Duration: " + callTime + "\n\n" +
+                 "Transcript:\n";
+    
+    // Format the transcript content
+    var transcriptContent = "";
+    transcriptList.forEach(function(li) {
+        var timestamp = li.querySelector('h4').innerText.trim();
+        var speaker = li.querySelector('.list_text h2').innerText.trim();
+        var text = li.querySelector('.list_text p').innerText.trim();
+        transcriptContent += timestamp + " " + speaker + " " + text + "\n";
+    });
+    
+    // Combine the header and transcript content
+    var fullTranscript = header + transcriptContent;
+    
+    // Create a Blob with the content
+    var blob = new Blob([fullTranscript], {type: "text/plain;charset=utf-8"});
+    
+    // Create a temporary URL for the Blob
+    var url = window.URL.createObjectURL(blob);
+    
+    // Create a temporary anchor element
+    var a = document.createElement("a");
+    document.body.appendChild(a);
+    a.style = "display: none";
+    
+    // Set the download attributes
+    a.href = url;
+    a.download = `call_transcript_${caregiverName.replace(/\s+/g, '_')}_${callDate.replace(/\//g, '-')}.txt`;
+    
+    // Trigger the download
+    a.click();
+    
+    // Clean up
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+}
+</script>
+
+
+</html>

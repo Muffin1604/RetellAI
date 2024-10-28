@@ -1,0 +1,551 @@
+@media(max-width:1400px) {
+    .home_heading h1 {
+        font-size: 42px;
+    }
+}
+
+@media(max-width:1300px) {
+    .progress-circle {
+        width: 195px;
+        height: 195px;
+    }
+    .progress-circle .circle{
+        width: 140px;
+        height: 140px;
+    }
+    .progress-circle .progress_bar{
+        width: 120px;
+        height: 120px;
+    }
+    .progress-circle .progress_bar::after{
+        width: 115px;
+    height: 115px;
+    }
+}
+
+@media(max-width:1200px) {
+    .home_heading h1 {
+        font-size: 36px;
+        line-height: 52px;
+    }
+
+    .home_heading {
+        height: 100px;
+    }
+    .tasks_outer {
+        flex-wrap: wrap;
+    }
+    .aide_patient_box{
+        width: 970px;
+    }
+    .agent_edit_box_header{
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media(max-width:992px) {
+    .toggle-btn {
+        width: 44px;
+        border: 0;
+        background: transparent;
+    }
+    .tasks_outer {
+        flex-wrap: nowrap;
+    }
+    .toggle-btn span {
+        height: 4px;
+        background-color: #000000;
+        border-radius: 4px;
+        display: block;
+        width: 26px;
+        margin-bottom: 3px;
+        margin-left: auto;
+    }
+    .toggle-btn span:nth-child(2) {
+        width: 20px;
+    }
+    .toggle-btn span:last-child {
+        width: 15px;
+    }
+
+    .admin_dashboard .left_side_menu {
+        transform: translateX(-100%);
+        transition: all 0.4s ease-in-out;
+        right: 0;
+        padding: 20px 0px 0px;
+    }
+
+    .admin_dashboard .sidebar_logo {
+        padding: 0px 16px;
+    }
+
+    .menu-open .admin_dashboard .left_side_menu {
+        transform: translateX(0%);
+        z-index: 99;
+    }
+
+    section.admin_dashboard .content-page {
+        width: -webkit-fill-available;
+    }
+
+    .menu-open {
+        overflow: hidden;
+    }
+
+    .menu-open::after {
+        content: '';
+        background-color: #00000038;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: 9;
+    }
+
+    .dashboard_sidebar_links {
+        margin: 50px 0px;
+        height: calc(100vh - 230px);
+    }
+
+    .close-btn {
+        height: 30px;
+        width: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        left: -100%;
+        transform: translateX(14px);
+        z-index: 99;
+        top: 12px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease-in-out;
+        border: 1px solid #3E7258;
+        border-radius: 100%;
+    }
+
+    .menu-open .close-btn {
+        left: 220px;
+        opacity: 1;
+        visibility: visible;
+    }
+    .summary_cards_outer{
+        margin-top: 20px;
+        padding: 20px 20px;
+    }
+
+    .home_header {
+        padding: 20px 0px;
+    }
+
+    .home_header .navbar-toggler {
+        border: none;
+    }
+
+    .home_header .navbar-toggler:focus {
+        box-shadow: none;
+        outline: none;
+    }
+
+    .home_header .navbar-toggler span {
+        height: 4px;
+        background-color: #000000;
+        border-radius: 4px;
+        display: block;
+        width: 26px;
+        margin-bottom: 3px;
+        margin-left: auto;
+    }
+
+    .home_header .navbar-toggler span:nth-child(2) {
+        width: 20px;
+    }
+
+    .home_header .navbar-toggler span:last-child {
+        width: 15px;
+    }
+
+    .home_header .navbar-toggler:not(.collapsed) span:last-child {
+        display: none;
+    }
+
+    .home_header .navbar-toggler:not(.collapsed) span {
+        transform: rotate(310deg);
+    }
+
+    .home_header .navbar-toggler:not(.collapsed) span:nth-child(2) {
+        width: 26px;
+        transform: rotate(45deg);
+        margin-top: -8px;
+    }
+
+    .home_header .navbar-collapse {
+        position: absolute;
+        background: #effff7;
+        top: 70px;
+        width: -webkit-fill-available;
+        left: 0px;
+        z-index: 2;
+        border: 2px solid #E3FFF2;
+        border-radius: 10px;
+        margin: 0px 5px;
+        padding: 10px 20px;
+        box-shadow: 0px 0px 5px 0px #86DEB1F0;
+    }
+
+    .home_header .navbar-nav {
+        align-items: start !important;
+        gap: 0px;
+    }
+
+    .home_header .navbar-nav a.learn_services {
+        margin: 0px;
+    }
+    .table td .description{
+        width: 100%;
+    }
+    .caller_list_outer .table td .description{
+        width: 280px;
+    }
+    .aide_patient_box{
+        width: 100%;
+    }
+    .aide_patient_box_header{
+        flex-wrap: wrap;
+    }
+    .open-aide-patient-box{
+        overflow: auto;
+    }
+    .table_header_btns .table_buttons{
+        gap: 10px;
+        
+    }
+    .table_header_btns button{
+        padding: 9px 5px;
+        max-width: 180px;
+        font-size: 14px;
+    }
+    .table_header_btns select{
+        padding: 9px 41px 9px 11px;
+    }
+    .aide_table .form_check{
+        width: 140px;
+    }
+    .call_ended_detail{
+        flex-wrap: wrap;
+    }
+    .phone_list_outer .phone_list_data{
+        max-height:unset;
+    }
+    .contact_us_box{
+        padding-top: 20px;
+    }
+}
+
+@media(max-width:768px) {
+    .tasks_outer, .table_header_btns, .table_header_btns .table_buttons,
+    .agent_edit_box_header_btns  {
+        flex-wrap: wrap;
+    }
+    .agent_edit_box_header{
+        display: grid;
+    }
+    .call_ended_detail{
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+    .table_header_btns .table_buttons, .table_header_btns{
+        justify-content: end!important;
+    }
+    .login_sec {
+        padding: 20px 0px 40px;
+    }
+
+    .login_sec .right-side {
+        display: none;
+    }
+
+    .login_signup_header {
+        padding: 20px 0px;
+    }
+
+    .use_cases_tab .nav-link {
+        padding: 8px 8px;
+        font-size: 14px;
+    }
+
+    .use_cases_tab .nav-tabs {
+        gap: 14px;
+    }
+
+    .logo_sec {
+        padding: 20px 0px;
+    }
+
+    .voice_agent_sec {
+        padding: 25px 0px 0px;
+    }
+
+    .video_sec {
+        padding: 40px 0px;
+    }
+
+    .use_cases_tab .tab-content {
+        padding-bottom: 0px;
+    }
+
+    .faq_sec {
+        padding: 20px 0px 40px;
+    }
+
+    .video_box {
+        margin: 20px 0px;
+        padding: 0px 30px;
+    }
+
+    .faq_outer {
+        padding-right: 0px;
+    }
+
+    .contact_us_box {
+        padding-left: 0px;
+    }
+
+    .tabs_content .row {
+        --bs-gutter-x: 10px;
+        --bs-gutter-y: 10px;
+    }
+    .table td .description{
+        width: 280px;
+    }
+    .aide_patient_box .submit_btn button, .caller_list_outer .create_btn button{
+        padding: 11px 38px;
+    }
+    .aide_patient_box .submit_btn{
+    margin: 18px 10px;
+    }
+    .history_log_detail_outer .detail_left{
+        padding-left: 0px;
+    }
+    .history_log_detail_outer{
+        padding: 10px 10px;
+    }
+    .call_transcript{
+        max-height: unset;
+        margin-top: 15px;
+    }
+}
+
+@media(max-width:576px) {
+    .call_progess_content .calls_content{
+        display: grid;
+    }
+    .automation_workflow_popup .form_input_outer{
+        grid-template-columns: 2fr;
+    }
+    .table_header_btns .table_buttons, .table_header_btns{
+        justify-content: center!important;
+    }
+    .login_sec h1 {
+        font-size: 50px;
+    }
+
+    .login_robot img {
+        width: 50px;
+    }
+
+    .home_heading h1 {
+        font-size: 26px;
+        line-height: 32px;
+    }
+
+    .home_heading {
+        height: 70px;
+    }
+
+    .faq_sec .faq_heading h1 {
+        font-size: 28px;
+        line-height: 50.16px;
+        top: -4px;
+    }
+
+    .faq_sec .faq_heading h2,
+    .use_cases_sec .heading h2,
+    .contact_us_box h2 {
+        font-size: 26px;
+    }
+
+    .use_cases_sec {
+        padding: 28px 0px 0px;
+    }
+
+    .use_cases_tab .nav-tabs {
+        gap: 6px;
+    }
+
+    .tabs_content_box .tab_box_img {
+        margin-bottom: 10px;
+    }
+
+    .tabs_content_box {
+        padding: 12px 12px;
+    }
+
+    .video_play_btn button {
+        height: 76px;
+        width: 76px;
+    }
+
+    .video_play_btn button img {
+        width: 30px;
+    }
+
+    .voice_agent_sec .mic_icon {
+        height: 170px;
+        width: 170px;
+    }
+
+    .voice_agent_sec .mic_icon img {
+        width: 80px;
+    }
+
+    .voice_agent_sec h5 {
+        font-size: 20px;
+        line-height: 30px;
+    }
+    .chart_outer{
+        padding: 15px 15px;
+    }
+    .chart_outer .line_chart{
+        margin-top: 0px;
+    }
+    .dashboard_content_header{
+        padding: 10px 10px;
+        display: grid !important;
+        grid-template-columns: 20% 70%;
+    }
+    .dashboard_content_header .select-selected{
+        width: auto;
+    }
+    .custom-select-container{
+        grid-column: 2;
+    }
+    .open-aide-patient-box::after{
+        height: 150%;
+    }
+    .call_summary{
+        padding: 15px 14px;
+    }
+    .call_summary li{
+        font-size: 14px;
+    }
+    .tools_detail{
+        max-width: 330px;
+        left: 10px;
+    }
+}
+
+@media(max-width:420px) {
+    .login_signup_header img {
+        width: 140px;
+    }
+
+    .signup_sec h2 {
+        font-size: 26px;
+        line-height: 23.35px;
+
+    }
+
+    .login_sec form {
+        margin-top: 24px;
+    }
+
+    .home_heading h1 {
+        font-size: 22px;
+        line-height: 32px;
+    }
+
+    .faq_sec .faq_heading h1 {
+        font-size: 24px;
+        line-height: 40px;
+        top: -4px;
+    }
+
+    .faq_sec .faq_heading h2,
+    .use_cases_sec .heading h2,
+    .contact_us_box h2 {
+        font-size: 24px;
+        line-height: 40px;
+    }
+
+    .voice_agent_sec h5 {
+        font-size: 16px;
+    }
+    .call_progress_data .tasks_outer .task_box h4{
+        font-size: 22px;
+    }
+    .call_progress_data .tasks_outer .task_box h5{
+        font-size: 20px;
+    }
+    .call_progess_content .call_progess_box, .call_ended_detail, .call_summary_header {
+       flex-wrap: wrap;
+       gap: 10px;
+    }
+    .call_progress_data .progress-circle{
+        width: 220px;
+    height: 220px;
+    }
+    .call_progress_data .barOverflow{
+        height: 100px;
+    }
+    .call_progress_data .progress-circle .circle p {
+        margin-top: -65px;
+        font-size: 13px;
+    }
+    .call_progess_content .bound_call_box{
+        max-width: 100%;
+    }
+    .tools_box .tools_box_header, .tools_detail_inner{
+        padding: 15px 15px;
+    }
+    .call_transfer_form input{
+        padding: 9px 15px;
+    }
+    .dashboard_content_header input{
+        padding: 9px 13px;
+    font-size: 14px;
+    }
+    .summary_cards_outer .summary_cards_box{
+        padding: 14px 15px;
+    }
+    .summary_cards_outer .summary_cards_box h6{
+        font-size: 18px;
+    }
+    .summary_cards_outer .summary_cards_box p{
+        font-size: 14px;
+    }
+    .timestamp_list .list_text{
+        display: grid;
+    }
+}
+@media(max-width:375px){
+    .call_progress_data .tasks_outer .task_box h5 {
+        font-size: 16px;
+    }
+    .call_progress_data .tasks_outer .task_box{
+        padding: 15px 15px 0px;
+    }
+    .call_progress_data .tasks_outer .task_box h4 {
+        font-size: 18px;
+    }
+    .add_agent_box, .agent_edit_box{
+        padding: 12px 12px;
+    }
+    .tools_detail{
+        max-width: max-content;
+        left: 10px;
+    }
+}
